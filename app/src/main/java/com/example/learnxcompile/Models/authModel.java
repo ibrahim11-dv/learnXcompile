@@ -64,6 +64,13 @@ public class authModel extends SQLiteOpenHelper {
         db.close();
         return isValid;
     }
+    public boolean userExists(String username, String email){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT * FROM "+TABLE_NAME+
+                " WHERE email= ? OR username= ? ";
+        Cursor cursor = db.rawQuery(sql, new String[]{username,email});
+        return cursor.getCount() > 0;
+    }
 
 }
 

@@ -1,6 +1,5 @@
 package com.example.learnxcompile;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -34,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email    = etEmail.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
-                if (ac.authentificate(email,password)) {
+                if (ac.authenticate(email,password)) {
                     Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                     startActivity(intent);
                 } else {
