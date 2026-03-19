@@ -43,4 +43,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    // La ligne que tu as ajoutée
+    implementation("com.github.mhiew:android-pdf-viewer:3.2.0-beta.1")
 }

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <!-- Numéro du chapitre avec cercle coloré -->
+        <TextView
+            android:id="@+id/tvChapterNumber"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:text="1"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#5B6BF8"
+            android:gravity="center"
+            android:background="@drawable/bg_chapter_number" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp">
+
+            <TextView
+                android:id="@+id/tvChapterTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chapter 1: Introduction"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#1A1D2E" />
+
+            <TextView
+                android:id="@+id/tvChapterDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Learn the basics and fundamentals"
+                android:textSize="12sp"
+                android:textColor="#8A8FA8"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
+
+        <!-- Icône de verrouillage/déverrouillage -->
+        <ImageView
+            android:id="@+id/ivLock"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_unlocked"
+            app:tint="#5B6BF8" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         LinearLayout layoutLogin = findViewById(R.id.layoutLogin);
-        LinearLayout layoutHome  = findViewById(R.id.layoutHome);
+        //LinearLayout layoutHome  = findViewById(R.id.layoutHome);
         EditText etEmail         = findViewById(R.id.etEmail);
         EditText etPassword      = findViewById(R.id.etPassword);
         Button btnSignIn         = findViewById(R.id.btnSignIn);
