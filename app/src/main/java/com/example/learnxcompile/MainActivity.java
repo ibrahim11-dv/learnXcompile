@@ -20,8 +20,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        LinearLayout layoutLogin = findViewById(R.id.layoutLogin);
-        LinearLayout layoutHome  = findViewById(R.id.layoutHome);
         EditText etEmail         = findViewById(R.id.etEmail);
         EditText etPassword      = findViewById(R.id.etPassword);
         Button btnSignIn         = findViewById(R.id.btnSignIn);
@@ -34,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
                 String email    = etEmail.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
                 if (ac.authenticate(email,password)) {
+                    Toast.makeText(MainActivity.this, "it worked i guess", Toast.LENGTH_SHORT);
                     Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                     startActivity(intent);
                 } else {
