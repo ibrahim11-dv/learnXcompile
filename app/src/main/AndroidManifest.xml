@@ -26,9 +26,7 @@
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />
-        <activity android:name=".Controllers.ChaptersActivity" />
-
-        <activity android:name=".PdfViewerActivity" />
+        <activity android:name=".ChaptersActivity" />
     </application>
 
 </manifest>

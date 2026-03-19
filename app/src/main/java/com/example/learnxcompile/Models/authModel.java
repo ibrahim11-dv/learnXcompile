@@ -6,8 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -16,15 +14,15 @@ public class authModel extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_NAME = "users";
     // used this flag for testing !!
-//    private static boolean isFirstStart = true;
+    private static boolean isFirstStart = true;
 
     public authModel(Context context) {
         super(context, DATABASE_NAME,null, DATABASE_VERSION);
 
-//        if(isFirstStart){
-//            context.deleteDatabase(DATABASE_NAME);
-//            isFirstStart = false;
-//        }
+           if(isFirstStart){
+           context.deleteDatabase(DATABASE_NAME);
+           isFirstStart = false;
+            }
     }
 
     @Override
