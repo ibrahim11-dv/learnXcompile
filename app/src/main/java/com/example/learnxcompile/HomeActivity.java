@@ -7,8 +7,8 @@ import androidx.cardview.widget.CardView;
 import android.widget.TextView;
 import android.widget.ProgressBar;
 
+import com.example.learnxcompile.Controllers.ChapterController;
 import com.example.learnxcompile.Items.Language;
-import com.example.learnxcompile.Models.ChapterModel;
 
 import java.util.List;
 
@@ -17,14 +17,14 @@ public class HomeActivity extends AppCompatActivity {
     private TextView tvJavaProgress, tvPythonProgress;
     private ProgressBar progressJava, progressPython;
     private TextView tvLessonsCount;
-    private ChapterModel chapterModel;
+    private ChapterController chapterController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        chapterModel = new ChapterModel(this);
+        chapterController = new ChapterController(this);
         initViews();
         loadData();
         setupClickListeners();
@@ -39,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        List<Language> languages = chapterModel.getLanguages();
+        List<Language> languages = chapterController.getLanguages();
         int totalDone = 0;
 
         for (Language lang : languages) {

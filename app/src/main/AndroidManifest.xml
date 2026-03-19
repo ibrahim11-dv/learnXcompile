@@ -27,6 +27,10 @@
             android:name=".SignUpActivity"
             android:exported="false" />
         <activity android:name=".ChaptersActivity" />
+        <activity android:name=".ChapterExplanationActivity" />
+        <activity android:name=".CodeExampleActivity" />
+        <activity android:name=".QcmActivity" />
+        <activity android:name=".TestActivity" />
     </application>
 
 </manifest>

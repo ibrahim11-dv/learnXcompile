@@ -1,5 +1,6 @@
 package com.example.learnxcompile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,14 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.learnxcompile.Controllers.ChapterController;
 import com.example.learnxcompile.Items.Language;
-import com.example.learnxcompile.Models.ChapterModel;
 
 import java.util.List;
 
 public class ChaptersActivity extends AppCompatActivity {
 
-    private ChapterModel chapterModel;
+    private ChapterController chapterController;
     private RecyclerView recyclerView;
     private String languageName;
 
@@ -31,7 +32,7 @@ public class ChaptersActivity extends AppCompatActivity {
         TextView tvLanguageTitle = findViewById(R.id.tvLanguageTitle);
         tvLanguageTitle.setText(languageName + " Chapters");
 
-        chapterModel = new ChapterModel(this);
+        chapterController = new ChapterController(this);
         recyclerView = findViewById(R.id.recyclerViewChapters);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -39,7 +40,7 @@ public class ChaptersActivity extends AppCompatActivity {
     }
 
     private void loadChapters() {
-        Language language = chapterModel.getLanguageByName(languageName);
+        Language language = chapterController.getLanguageByName(languageName);
         if (language != null && language.chapters != null) {
             recyclerView.setAdapter(new ChaptersAdapter(language.chapters));
         } else {
@@ -76,9 +77,12 @@ public class ChaptersActivity extends AppCompatActivity {
             } else {
                 holder.ivLock.setImageResource(R.drawable.ic_unlocked);
                 holder.itemView.setAlpha(1.0f);
-                holder.itemView.setOnClickListener(v -> 
-                    Toast.makeText(ChaptersActivity.this, "Opening " + chapter.title, Toast.LENGTH_SHORT).show()
-                );
+                holder.itemView.setOnClickListener(v -> {
+                    Intent intent = new Intent(ChaptersActivity.this, ChapterExplanationActivity.class);
+                    intent.putExtra("CHAPTER_TITLE", chapter.title);
+                    intent.putExtra("CHAPTER_ID", chapter.id);
+                    startActivity(intent);
+                });
             }
         }
 

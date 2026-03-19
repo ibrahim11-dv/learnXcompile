@@ -158,28 +158,10 @@
             android:paddingTop="20dp"
             android:paddingBottom="12dp">
 
-            <!-- Illustration card -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="190dp"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="#E8EAFD">
-
-                <ImageView
-                    android:id="@+id/imgIllustration"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerInside"
-                    android:padding="24dp"
-                    android:contentDescription="Step illustration" />
-            </androidx.cardview.widget.CardView>
-
             <!-- Overview card -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="0dp"
                 app:cardBackgroundColor="#FFFFFF">

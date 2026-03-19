@@ -249,7 +249,7 @@
                             android:id="@+id/tvJavaProgress"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0 / 10 lessons"
+                            android:text="0 / 12 lessons"
                             android:textSize="11sp"
                             android:textColor="#8A8FA8"
                             android:layout_marginTop="4dp" />
@@ -333,7 +333,7 @@
                             android:id="@+id/tvPythonProgress"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0 / 10 lessons"
+                            android:text="0 / 12 lessons"
                             android:textSize="11sp"
                             android:textColor="#8A8FA8"
                             android:layout_marginTop="4dp" />
