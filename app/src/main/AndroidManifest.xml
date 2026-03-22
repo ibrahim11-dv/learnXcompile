@@ -31,6 +31,7 @@
         <activity android:name=".CodeExampleActivity" />
         <activity android:name=".QcmActivity" />
         <activity android:name=".TestActivity" />
+        <activity android:name=".SubscriptionActivity" />
     </application>
 
 </manifest>

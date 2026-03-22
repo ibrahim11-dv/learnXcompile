@@ -3,6 +3,9 @@ package com.example.learnxcompile;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.content.DialogInterface;
+import androidx.appcompat.app.AlertDialog;
+import android.content.SharedPreferences;
 import androidx.cardview.widget.CardView;
 import android.widget.TextView;
 import android.widget.ProgressBar;
@@ -18,6 +21,7 @@ public class HomeActivity extends AppCompatActivity {
     private ProgressBar progressJava, progressPython;
     private TextView tvLessonsCount;
     private ChapterController chapterController;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,8 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         chapterController = new ChapterController(this);
+        prefs = getSharedPreferences("SubscriptionPrefs", MODE_PRIVATE);
+
         initViews();
         loadData();
         setupClickListeners();
@@ -56,8 +62,35 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void setupClickListeners() {
-        findViewById(R.id.cardJava).setOnClickListener(v -> startChapters("Java"));
-        findViewById(R.id.cardPython).setOnClickListener(v -> startChapters("Python"));
+        findViewById(R.id.cardJava).setOnClickListener(v -> checkSubscriptionAndOpen("Java"));
+        findViewById(R.id.cardPython).setOnClickListener(v -> checkSubscriptionAndOpen("Python"));
+    }
+
+    private void checkSubscriptionAndOpen(String languageName) {
+        SharedPreferences prefs = getSharedPreferences("SubscriptionPrefs", MODE_PRIVATE);
+        boolean isSubscribed = prefs.getBoolean("subscribed_" + languageName, false);
+
+        if (isSubscribed) {
+            startChapters(languageName);
+        } else {
+            showSubscriptionDialog(languageName);
+        }
+    }
+
+    private void showSubscriptionDialog(String languageName) {
+        new AlertDialog.Builder(this)
+                .setTitle("Abonnement requis")
+                .setMessage("Vous devez vous abonner (5$) pour accéder au cours " + languageName + ". Voulez-vous continuer ?")
+                .setPositiveButton("S'abonner", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(HomeActivity.this, SubscriptionActivity.class);
+                        intent.putExtra("LANGUAGE_NAME", languageName);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Non merci", null)
+                .show();
     }
 
     private void startChapters(String languageName) {
