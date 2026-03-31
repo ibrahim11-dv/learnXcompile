@@ -14,6 +14,7 @@ public class ChapterExplanationActivity extends AppCompatActivity {
     private ChapterController chapterController;
     private String chapterTitle;
     private int chapterId;
+    private String languageName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,7 @@ public class ChapterExplanationActivity extends AppCompatActivity {
         chapterController = new ChapterController(this);
         chapterTitle = getIntent().getStringExtra("CHAPTER_TITLE");
         chapterId = getIntent().getIntExtra("CHAPTER_ID", -1);
+        languageName = getIntent().getStringExtra("LANGUAGE_NAME");
 
         initViews();
     }
@@ -55,6 +57,7 @@ public class ChapterExplanationActivity extends AppCompatActivity {
             Intent intent = new Intent(ChapterExplanationActivity.this, CodeExampleActivity.class);
             intent.putExtra("CHAPTER_TITLE", chapterTitle);
             intent.putExtra("CHAPTER_ID", chapterId);
+            intent.putExtra("LANGUAGE_NAME", languageName);
             startActivity(intent);
         });
     }

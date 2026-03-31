@@ -32,6 +32,7 @@
         <activity android:name=".QcmActivity" />
         <activity android:name=".TestActivity" />
         <activity android:name=".SubscriptionActivity" />
+        <activity android:name=".ProfileActivity" />
     </application>
 
 </manifest>

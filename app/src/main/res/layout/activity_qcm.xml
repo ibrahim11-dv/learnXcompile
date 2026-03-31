@@ -59,7 +59,7 @@
                     android:id="@+id/tvChapterBadge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Chapter 1"
+                    android:text="Step 3/4"
                     android:textSize="11sp"
                     android:textStyle="bold"
                     android:textColor="#5B6BF8"
@@ -129,7 +129,7 @@
                     android:layout_width="0dp"
                     android:layout_height="5dp"
                     android:layout_weight="1"
-                    android:background="#3F51B5" />
+                    android:background="#4A5AE8" />
 
             </LinearLayout>
 
@@ -194,12 +194,12 @@
                             android:layout_height="1dp"
                             android:layout_weight="1" />
 
-                        <!-- Question number e.g 1/3 -->
+                        <!-- Question number -->
                         <TextView
                             android:id="@+id/tvQuestionNumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="1 / 3"
+                            android:text="1 / 1"
                             android:textSize="12sp"
                             android:textColor="#8A8FA8" />
                     </LinearLayout>
@@ -215,7 +215,7 @@
                         android:id="@+id/tvQuestion"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="What is the entry point of every Java program?"
+                        android:text="Loading question..."
                         android:textSize="17sp"
                         android:textStyle="bold"
                         android:textColor="#1A1D2E"
@@ -231,7 +231,6 @@
                 android:orientation="vertical"
                 android:layout_marginTop="14dp">
 
-                <!-- Option A -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/optionA"
                     android:layout_width="match_parent"
@@ -243,46 +242,12 @@
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp"
                     app:cardBackgroundColor="#FFFFFF">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:padding="18dp">
-
-                        <TextView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:text="A"
-                            android:textSize="13sp"
-                            android:textStyle="bold"
-                            android:textColor="#5B6BF8"
-                            android:gravity="center"
-                            android:background="#E8EAFD" />
-
-                        <TextView
-                            android:id="@+id/tvOptionA"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginStart="14dp"
-                            android:text="public void start()"
-                            android:textSize="15sp"
-                            android:textColor="#3A3D50"
-                            android:fontFamily="monospace" />
-
-                        <TextView
-                            android:id="@+id/tvOptionAIcon"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:text=""
-                            android:gravity="center"
-                            android:visibility="invisible" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="18dp">
+                        <TextView android:layout_width="32dp" android:layout_height="32dp" android:text="A" android:textSize="13sp" android:textStyle="bold" android:textColor="#5B6BF8" android:gravity="center" android:background="#E8EAFD" />
+                        <TextView android:id="@+id/tvOptionA" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="14dp" android:text="Option A" android:textSize="15sp" android:textColor="#3A3D50" android:fontFamily="monospace" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- Option B -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/optionB"
                     android:layout_width="match_parent"
@@ -294,46 +259,12 @@
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp"
                     app:cardBackgroundColor="#FFFFFF">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:padding="18dp">
-
-                        <TextView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:text="B"
-                            android:textSize="13sp"
-                            android:textStyle="bold"
-                            android:textColor="#5B6BF8"
-                            android:gravity="center"
-                            android:background="#E8EAFD" />
-
-                        <TextView
-                            android:id="@+id/tvOptionB"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginStart="14dp"
-                            android:text="public static void main(String[] args)"
-                            android:textSize="15sp"
-                            android:textColor="#3A3D50"
-                            android:fontFamily="monospace" />
-
-                        <TextView
-                            android:id="@+id/tvOptionBIcon"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:text=""
-                            android:gravity="center"
-                            android:visibility="invisible" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="18dp">
+                        <TextView android:layout_width="32dp" android:layout_height="32dp" android:text="B" android:textSize="13sp" android:textStyle="bold" android:textColor="#5B6BF8" android:gravity="center" android:background="#E8EAFD" />
+                        <TextView android:id="@+id/tvOptionB" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="14dp" android:text="Option B" android:textSize="15sp" android:textColor="#3A3D50" android:fontFamily="monospace" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- Option C -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/optionC"
                     android:layout_width="match_parent"
@@ -345,46 +276,12 @@
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp"
                     app:cardBackgroundColor="#FFFFFF">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:padding="18dp">
-
-                        <TextView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:text="C"
-                            android:textSize="13sp"
-                            android:textStyle="bold"
-                            android:textColor="#5B6BF8"
-                            android:gravity="center"
-                            android:background="#E8EAFD" />
-
-                        <TextView
-                            android:id="@+id/tvOptionC"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginStart="14dp"
-                            android:text="void run(String[] args)"
-                            android:textSize="15sp"
-                            android:textColor="#3A3D50"
-                            android:fontFamily="monospace" />
-
-                        <TextView
-                            android:id="@+id/tvOptionCIcon"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:text=""
-                            android:gravity="center"
-                            android:visibility="invisible" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="18dp">
+                        <TextView android:layout_width="32dp" android:layout_height="32dp" android:text="C" android:textSize="13sp" android:textStyle="bold" android:textColor="#5B6BF8" android:gravity="center" android:background="#E8EAFD" />
+                        <TextView android:id="@+id/tvOptionC" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="14dp" android:text="Option C" android:textSize="15sp" android:textColor="#3A3D50" android:fontFamily="monospace" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- Option D -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/optionD"
                     android:layout_width="match_parent"
@@ -396,48 +293,14 @@
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp"
                     app:cardBackgroundColor="#FFFFFF">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:padding="18dp">
-
-                        <TextView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:text="D"
-                            android:textSize="13sp"
-                            android:textStyle="bold"
-                            android:textColor="#5B6BF8"
-                            android:gravity="center"
-                            android:background="#E8EAFD" />
-
-                        <TextView
-                            android:id="@+id/tvOptionD"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginStart="14dp"
-                            android:text="static void main()"
-                            android:textSize="15sp"
-                            android:textColor="#3A3D50"
-                            android:fontFamily="monospace" />
-
-                        <TextView
-                            android:id="@+id/tvOptionDIcon"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:text=""
-                            android:gravity="center"
-                            android:visibility="invisible" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="18dp">
+                        <TextView android:layout_width="32dp" android:layout_height="32dp" android:text="D" android:textSize="13sp" android:textStyle="bold" android:textColor="#5B6BF8" android:gravity="center" android:background="#E8EAFD" />
+                        <TextView android:id="@+id/tvOptionD" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="14dp" android:text="Option D" android:textSize="15sp" android:textColor="#3A3D50" android:fontFamily="monospace" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-
             </LinearLayout>
 
-            <!-- Result / explanation card — hidden until answered -->
+            <!-- Result card -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardResult"
                 android:layout_width="match_parent"
@@ -447,61 +310,20 @@
                 app:cardCornerRadius="20dp"
                 app:cardElevation="0dp"
                 app:cardBackgroundColor="#1A1D2E">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            android:id="@+id/tvResultIcon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="✓"
-                            android:textSize="16sp"
-                            android:textColor="#4CAF50" />
-
-                        <TextView
-                            android:id="@+id/tvResultLabel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="  Correct!"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:textColor="#4CAF50" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
+                        <TextView android:id="@+id/tvResultIcon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="✓" android:textSize="16sp" android:textColor="#4CAF50" />
+                        <TextView android:id="@+id/tvResultLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="  Correct!" android:textSize="14sp" android:textStyle="bold" android:textColor="#4CAF50" />
                     </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#2A2D3E"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="12dp" />
-
-                    <TextView
-                        android:id="@+id/tvResultExplanation"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="The main method is the entry point. The JVM looks for exactly this signature to start execution."
-                        android:textSize="14sp"
-                        android:textColor="#8A8FA8"
-                        android:lineSpacingMultiplier="1.65" />
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#2A2D3E" android:layout_marginTop="12dp" android:layout_marginBottom="12dp" />
+                    <TextView android:id="@+id/tvResultExplanation" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Explanation here..." android:textSize="14sp" android:textColor="#8A8FA8" android:lineSpacingMultiplier="1.65" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
     </ScrollView>
 
-    <!-- ═══════════════════════════════
-         FIXED BOTTOM BUTTON
-    ═══════════════════════════════ -->
+    <!-- FIXED BOTTOM BUTTON -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -513,13 +335,8 @@
         android:paddingBottom="28dp"
         android:elevation="8dp">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#E8E9F3"
-            android:layout_marginBottom="12dp" />
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E8E9F3" android:layout_marginBottom="12dp" />
 
-        <!-- Before answer: Check button -->
         <androidx.cardview.widget.CardView
             android:id="@+id/btnCheck"
             android:layout_width="match_parent"
@@ -530,26 +347,11 @@
             app:cardCornerRadius="16dp"
             app:cardElevation="0dp"
             app:cardBackgroundColor="#5B6BF8">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:paddingTop="18dp"
-                android:paddingBottom="18dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Check Answer"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center" android:paddingTop="18dp" android:paddingBottom="18dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Check Answer" android:textSize="16sp" android:textStyle="bold" android:textColor="#FFFFFF" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- After answer: Continue button (hidden initially) -->
         <androidx.cardview.widget.CardView
             android:id="@+id/btnNext"
             android:layout_width="match_parent"
@@ -562,32 +364,11 @@
             app:cardCornerRadius="16dp"
             app:cardElevation="0dp"
             app:cardBackgroundColor="#1A1D2E">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:paddingTop="18dp"
-                android:paddingBottom="18dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Continue"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="  →"
-                    android:textSize="18sp"
-                    android:textColor="#BFC5FB" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center" android:paddingTop="18dp" android:paddingBottom="18dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Continue" android:textSize="16sp" android:textStyle="bold" android:textColor="#FFFFFF" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="  →" android:textSize="18sp" android:textColor="#BFC5FB" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
     </LinearLayout>
 
 </LinearLayout>

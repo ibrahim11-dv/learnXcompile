@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
+import android.content.DialogInterface;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.ViewGroup;
@@ -48,6 +50,22 @@ public class ChaptersActivity extends AppCompatActivity {
         }
     }
 
+    private void showSubscriptionPopUp() {
+        new AlertDialog.Builder(this)
+                .setTitle("Accès Verrouillé")
+                .setMessage("Tu dois t'abonner pour compléter le cours " + languageName + " et débloquer tous les chapitres.")
+                .setPositiveButton("S'abonner (5$)", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(ChaptersActivity.this, SubscriptionActivity.class);
+                        intent.putExtra("LANGUAGE_NAME", languageName);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Plus tard", null)
+                .show();
+    }
+
     private class ChaptersAdapter extends RecyclerView.Adapter<ChaptersAdapter.ViewHolder> {
         private List<Language.Chapter> chapters;
 
@@ -71,9 +89,7 @@ public class ChaptersActivity extends AppCompatActivity {
             if (chapter.isLocked) {
                 holder.ivLock.setImageResource(R.drawable.ic_locked);
                 holder.itemView.setAlpha(0.6f);
-                holder.itemView.setOnClickListener(v -> 
-                    Toast.makeText(ChaptersActivity.this, "Chapter Locked", Toast.LENGTH_SHORT).show()
-                );
+                holder.itemView.setOnClickListener(v -> showSubscriptionPopUp());
             } else {
                 holder.ivLock.setImageResource(R.drawable.ic_unlocked);
                 holder.itemView.setAlpha(1.0f);
@@ -81,6 +97,7 @@ public class ChaptersActivity extends AppCompatActivity {
                     Intent intent = new Intent(ChaptersActivity.this, ChapterExplanationActivity.class);
                     intent.putExtra("CHAPTER_TITLE", chapter.title);
                     intent.putExtra("CHAPTER_ID", chapter.id);
+                    intent.putExtra("LANGUAGE_NAME", languageName);
                     startActivity(intent);
                 });
             }
@@ -103,5 +120,11 @@ public class ChaptersActivity extends AppCompatActivity {
                 ivLock = itemView.findViewById(R.id.ivLock);
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadChapters();
     }
 }

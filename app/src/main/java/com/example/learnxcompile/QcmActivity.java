@@ -14,6 +14,7 @@ public class QcmActivity extends AppCompatActivity {
     private ChapterController chapterController;
     private String chapterTitle;
     private int chapterId;
+    private String languageName;
     private int selectedOption = -1;
     private boolean answered = false;
 
@@ -31,6 +32,7 @@ public class QcmActivity extends AppCompatActivity {
         chapterController = new ChapterController(this);
         chapterTitle = getIntent().getStringExtra("CHAPTER_TITLE");
         chapterId = getIntent().getIntExtra("CHAPTER_ID", -1);
+        languageName = getIntent().getStringExtra("LANGUAGE_NAME");
 
         initViews();
         setupQuiz();
@@ -77,6 +79,7 @@ public class QcmActivity extends AppCompatActivity {
             Intent intent = new Intent(QcmActivity.this, TestActivity.class);
             intent.putExtra("CHAPTER_TITLE", chapterTitle);
             intent.putExtra("CHAPTER_ID", chapterId);
+            intent.putExtra("LANGUAGE_NAME", languageName);
             startActivity(intent);
         });
     }

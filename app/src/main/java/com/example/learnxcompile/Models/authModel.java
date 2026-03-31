@@ -9,6 +9,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class authModel extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "learnXcompile";
     private static final int DATABASE_VERSION = 1;
@@ -34,7 +37,7 @@ public class authModel extends SQLiteOpenHelper {
                 "password text)";
         String sqlInsert = "INSERT INTO " + TABLE_NAME +
                 "(username,email,password)"+
-                " VALUES ('username','test@gmail.com', '"+
+                " VALUES ('Ibrahim','test@gmail.com', '"+
                 BCrypt.hashpw("password", BCrypt.gensalt(10))+ "')";
         db.execSQL(sql);
         db.execSQL(sqlInsert);
@@ -78,8 +81,51 @@ public class authModel extends SQLiteOpenHelper {
         String sql = "SELECT * FROM "+TABLE_NAME+
                 " WHERE email= ? OR username= ? ";
         Cursor cursor = db.rawQuery(sql, new String[]{username,email});
-        return cursor.getCount() > 0;
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+        return exists;
     }
 
-}
+    public String getUsername(String nameOrEmail) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT username FROM " + TABLE_NAME + " WHERE email = ? OR username = ?";
+        Cursor cursor = db.rawQuery(sql, new String[]{nameOrEmail, nameOrEmail});
+        String username = "User";
+        if (cursor.moveToFirst()) {
+            username = cursor.getString(0);
+        }
+        cursor.close();
+        return username;
+    }
 
+    public Map<String, String> getUserDetails(String nameOrEmail) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT username, email FROM " + TABLE_NAME + " WHERE email = ? OR username = ?";
+        Cursor cursor = db.rawQuery(sql, new String[]{nameOrEmail, nameOrEmail});
+        Map<String, String> details = new HashMap<>();
+        if (cursor.moveToFirst()) {
+            details.put("username", cursor.getString(0));
+            details.put("email", cursor.getString(1));
+        }
+        cursor.close();
+        return details;
+    }
+
+    public boolean updatePassword(String username, String newPassword) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("password", BCrypt.hashpw(newPassword, BCrypt.gensalt(10)));
+        int rows = db.update(TABLE_NAME, values, "username = ?", new String[]{username});
+        db.close();
+        return rows > 0;
+    }
+
+    public boolean updateUsername(String oldUsername, String newUsername) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("username", newUsername);
+        int rows = db.update(TABLE_NAME, values, "username = ?", new String[]{oldUsername});
+        db.close();
+        return rows > 0;
+    }
+}

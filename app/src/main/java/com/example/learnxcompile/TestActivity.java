@@ -1,24 +1,28 @@
 package com.example.learnxcompile;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
+import androidx.appcompat.app.AlertDialog;
+import android.view.LayoutInflater;
+
 import com.example.learnxcompile.Controllers.ChapterController;
+import com.example.learnxcompile.Items.Language;
 
 public class TestActivity extends AppCompatActivity {
 
     private ChapterController chapterController;
-    private String chapterTitle;
     private int chapterId;
-
-    private TextView tvInstructions, tvExpectedOutput, tvLanguageTag;
+    private String languageName;
+    private TextView tvInstructions;
     private EditText etCodeInput;
-    private CardView btnRunCode, btnNext, cardResult;
-    private TextView tvResultLabel;
+    private View btnSubmit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,68 +30,101 @@ public class TestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_test);
 
         chapterController = new ChapterController(this);
-        chapterTitle = getIntent().getStringExtra("CHAPTER_TITLE");
         chapterId = getIntent().getIntExtra("CHAPTER_ID", -1);
+        languageName = getIntent().getStringExtra("LANGUAGE_NAME");
 
-        initViews();
-        setupChallenge();
-    }
-
-    private void initViews() {
         tvInstructions = findViewById(R.id.tvInstructions);
-        tvExpectedOutput = findViewById(R.id.tvExpectedOutput);
-        tvLanguageTag = findViewById(R.id.tvLanguageTag);
         etCodeInput = findViewById(R.id.etCodeInput);
-        btnRunCode = findViewById(R.id.btnRunCode);
-        btnNext = findViewById(R.id.btnNext);
-        cardResult = findViewById(R.id.cardResult);
-        tvResultLabel = findViewById(R.id.tvResultLabel);
+        btnSubmit = findViewById(R.id.btnRunCode);
 
-        findViewById(R.id.btnBack).setOnClickListener(v -> finish());
-        
-        findViewById(R.id.btnReset).setOnClickListener(v -> 
-            etCodeInput.setText(chapterController.getStarterCode(chapterId))
-        );
+        loadTestData();
 
-        btnRunCode.setOnClickListener(v -> runCode());
-        
-        btnNext.setOnClickListener(v -> {
-            chapterController.completeChapter(chapterId);
-            Toast.makeText(this, "Chapter Completed!", Toast.LENGTH_LONG).show();
-            finishAffinity();
-            startActivity(new android.content.Intent(this, HomeActivity.class));
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkResult();
+            }
         });
     }
 
-    private void setupChallenge() {
+    private void loadTestData() {
         tvInstructions.setText(chapterController.getTestInstructions(chapterId));
-        tvExpectedOutput.setText(chapterController.getExpectedOutput(chapterId));
         etCodeInput.setText(chapterController.getStarterCode(chapterId));
     }
 
-    private void runCode() {
-        // Simple logic: if code contains the expected print statements, it passes
-        String input = etCodeInput.getText().toString();
-        String expected = chapterController.getExpectedOutput(chapterId);
-        
-        // This is a very basic simulation of "running" code
-        boolean passed = true;
-        for (String line : expected.split("\n")) {
-            if (!input.contains(line)) {
-                passed = false;
+    private void checkResult() {
+        String input = etCodeInput.getText().toString().trim();
+        String expected = chapterController.getExpectedOutput(chapterId).trim();
+
+        if (input.contains(expected)) {
+            Toast.makeText(this, "Correct !", Toast.LENGTH_SHORT).show();
+            chapterController.completeChapter(chapterId);
+            
+            // Check if this was the 4th chapter
+            checkIfShouldShowSubscription();
+        } else {
+            Toast.makeText(this, "Réessayez...", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void checkIfShouldShowSubscription() {
+        Language language = chapterController.getLanguageByName(languageName);
+        int currentOrder = -1;
+        for (Language.Chapter c : language.chapters) {
+            if (c.id == chapterId) {
+                currentOrder = c.order;
                 break;
             }
         }
 
-        cardResult.setVisibility(View.VISIBLE);
-        if (passed) {
-            tvResultLabel.setText("  All tests passed!");
-            tvResultLabel.setTextColor(0xFF4CAF50);
-            btnNext.setVisibility(View.VISIBLE);
-            btnRunCode.setVisibility(View.GONE);
+        SharedPreferences prefs = getSharedPreferences("SubscriptionPrefs", MODE_PRIVATE);
+        boolean isSubscribed = prefs.getBoolean("all_courses_subscribed", false) || 
+                              prefs.getBoolean("subscribed_" + languageName, false);
+
+        if (currentOrder == 4 && !isSubscribed) {
+            showSubscriptionPopUp();
         } else {
-            tvResultLabel.setText("  Test failed. Check your output.");
-            tvResultLabel.setTextColor(0xFFF44336);
+            finish();
         }
+    }
+
+    private void showSubscriptionPopUp() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_subscription_options, null);
+        builder.setView(view);
+
+        AlertDialog dialog = builder.create();
+        dialog.setCancelable(false);
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        }
+
+        TextView tvTitle = view.findViewById(R.id.tvCourseTitle);
+        tvTitle.setText("Cours " + languageName + " uniquement");
+
+        view.findViewById(R.id.cardSingleCourse).setOnClickListener(v -> {
+            Intent intent = new Intent(this, SubscriptionActivity.class);
+            intent.putExtra("LANGUAGE_NAME", languageName);
+            intent.putExtra("PLAN_TYPE", "SINGLE");
+            startActivity(intent);
+            dialog.dismiss();
+            finish();
+        });
+
+        view.findViewById(R.id.cardAllCourses).setOnClickListener(v -> {
+            Intent intent = new Intent(this, SubscriptionActivity.class);
+            intent.putExtra("LANGUAGE_NAME", "ALL");
+            intent.putExtra("PLAN_TYPE", "ALL_COURSES");
+            startActivity(intent);
+            dialog.dismiss();
+            finish();
+        });
+
+        view.findViewById(R.id.btnCancel).setOnClickListener(v -> {
+            dialog.dismiss();
+            finish();
+        });
+
+        dialog.show();
     }
 }

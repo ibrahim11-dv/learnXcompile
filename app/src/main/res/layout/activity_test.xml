@@ -59,7 +59,7 @@
                     android:id="@+id/tvChapterBadge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Chapter 1"
+                    android:text="Step 4/4"
                     android:textSize="11sp"
                     android:textStyle="bold"
                     android:textColor="#5B6BF8"
@@ -84,7 +84,7 @@
                 android:id="@+id/tvStepSubtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Complete the challenge below"
+                android:text="Complete the final challenge"
                 android:textSize="13sp"
                 android:textColor="#BFC5FB"
                 android:layout_marginTop="4dp" />
@@ -224,7 +224,7 @@
                         android:id="@+id/tvInstructions"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Write a Java program that prints your name and age on two separate lines using System.out.println()."
+                        android:text="Write a program that prints your name and age."
                         android:textSize="15sp"
                         android:textColor="#3A3D50"
                         android:lineSpacingMultiplier="1.75" />
@@ -259,7 +259,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:layout_marginStart="10dp"
-                                android:text='Use System.out.println("text") twice, once for each line.'
+                                android:text='Hint text goes here.'
                                 android:textSize="13sp"
                                 android:textColor="#E65100"
                                 android:lineSpacingMultiplier="1.5" />
@@ -298,7 +298,7 @@
                             android:id="@+id/tvLanguageTag"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Java"
+                            android:text="Code"
                             android:textSize="11sp"
                             android:textStyle="bold"
                             android:textColor="#E65100"
@@ -345,7 +345,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:minHeight="200dp"
-                        android:text="public class Main {\n    public static void main(String[] args) {\n        // Write your code here\n        \n    }\n}"
+                        android:text="// Write your code here"
                         android:textSize="14sp"
                         android:textColor="#E8EAFD"
                         android:fontFamily="monospace"
@@ -405,7 +405,7 @@
                         android:id="@+id/tvExpectedOutput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Ibrahim\n21"
+                        android:text="Output"
                         android:textSize="14sp"
                         android:textColor="#4CAF50"
                         android:fontFamily="monospace"
@@ -413,7 +413,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Result card — hidden until submitted -->
+            <!-- Result card -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardResult"
                 android:layout_width="match_parent"
@@ -461,7 +461,6 @@
                         android:layout_marginTop="12dp"
                         android:layout_marginBottom="12dp" />
 
-                    <!-- Test cases list -->
                     <LinearLayout
                         android:id="@+id/layoutTestCases"
                         android:layout_width="match_parent"
@@ -494,7 +493,6 @@
             android:background="#E8E9F3"
             android:layout_marginBottom="12dp" />
 
-        <!-- Run / Submit button -->
         <androidx.cardview.widget.CardView
             android:id="@+id/btnRunCode"
             android:layout_width="match_parent"
@@ -524,7 +522,6 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Continue button — hidden until tests pass -->
         <androidx.cardview.widget.CardView
             android:id="@+id/btnNext"
             android:layout_width="match_parent"
