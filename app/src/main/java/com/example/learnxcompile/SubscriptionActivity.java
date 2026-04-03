@@ -12,6 +12,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+import com.example.learnxcompile.Controllers.ChapterController;
+
 public class SubscriptionActivity extends AppCompatActivity {
 
     private EditText etCardNumber, etCardHolder, etExpiryDate, etCvv;
@@ -88,6 +90,7 @@ public class SubscriptionActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         saveSubscription();
+                        unlockChapters();
                         redirectToContent();
                     }
                 })
@@ -107,6 +110,15 @@ public class SubscriptionActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    private void unlockChapters() {
+        ChapterController chapterController = new ChapterController(this);
+        if ("ALL_COURSES".equals(planType)) {
+            chapterController.unlockAllForLanguage("ALL");
+        } else {
+            chapterController.unlockAllForLanguage(languageName);
+        }
+    }
+
     private void redirectToContent() {
         Intent intent;
         if ("ALL_COURSES".equals(planType)) {
@@ -117,6 +129,7 @@ public class SubscriptionActivity extends AppCompatActivity {
             // Go directly to the chapters of the language they just bought
             intent = new Intent(SubscriptionActivity.this, ChaptersActivity.class);
             intent.putExtra("LANGUAGE_NAME", languageName);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         }
         startActivity(intent);
         finish();

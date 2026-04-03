@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
 import android.view.LayoutInflater;
 
 import com.example.learnxcompile.Controllers.ChapterController;
@@ -20,9 +21,10 @@ public class TestActivity extends AppCompatActivity {
     private ChapterController chapterController;
     private int chapterId;
     private String languageName;
-    private TextView tvInstructions;
+    private TextView tvInstructions, tvHintText, tvExpectedOutput;
     private EditText etCodeInput;
-    private View btnSubmit;
+    private View btnSubmit, btnBack, btnHint, btnReset;
+    private CardView cardHint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,22 +36,38 @@ public class TestActivity extends AppCompatActivity {
         languageName = getIntent().getStringExtra("LANGUAGE_NAME");
 
         tvInstructions = findViewById(R.id.tvInstructions);
+        tvHintText = findViewById(R.id.tvHintText);
+        tvExpectedOutput = findViewById(R.id.tvExpectedOutput);
         etCodeInput = findViewById(R.id.etCodeInput);
         btnSubmit = findViewById(R.id.btnRunCode);
+        btnBack = findViewById(R.id.btnBack);
+        btnHint = findViewById(R.id.btnHint);
+        btnReset = findViewById(R.id.btnReset);
+        cardHint = findViewById(R.id.cardHint);
 
         loadTestData();
 
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkResult();
+        btnSubmit.setOnClickListener(v -> checkResult());
+        btnBack.setOnClickListener(v -> finish());
+        
+        btnHint.setOnClickListener(v -> {
+            if (cardHint.getVisibility() == View.GONE) {
+                cardHint.setVisibility(View.VISIBLE);
+            } else {
+                cardHint.setVisibility(View.GONE);
             }
+        });
+
+        btnReset.setOnClickListener(v -> {
+            etCodeInput.setText(chapterController.getStarterCode(chapterId));
         });
     }
 
     private void loadTestData() {
         tvInstructions.setText(chapterController.getTestInstructions(chapterId));
         etCodeInput.setText(chapterController.getStarterCode(chapterId));
+        tvHintText.setText(chapterController.getHint(chapterId));
+        tvExpectedOutput.setText(chapterController.getExpectedOutput(chapterId));
     }
 
     private void checkResult() {
@@ -60,7 +78,6 @@ public class TestActivity extends AppCompatActivity {
             Toast.makeText(this, "Correct !", Toast.LENGTH_SHORT).show();
             chapterController.completeChapter(chapterId);
             
-            // Check if this was the 4th chapter
             checkIfShouldShowSubscription();
         } else {
             Toast.makeText(this, "Réessayez...", Toast.LENGTH_SHORT).show();
@@ -70,10 +87,12 @@ public class TestActivity extends AppCompatActivity {
     private void checkIfShouldShowSubscription() {
         Language language = chapterController.getLanguageByName(languageName);
         int currentOrder = -1;
-        for (Language.Chapter c : language.chapters) {
-            if (c.id == chapterId) {
-                currentOrder = c.order;
-                break;
+        if (language != null && language.chapters != null) {
+            for (Language.Chapter c : language.chapters) {
+                if (c.id == chapterId) {
+                    currentOrder = c.order;
+                    break;
+                }
             }
         }
 
@@ -84,8 +103,16 @@ public class TestActivity extends AppCompatActivity {
         if (currentOrder == 4 && !isSubscribed) {
             showSubscriptionPopUp();
         } else {
-            finish();
+            goToChapters();
         }
+    }
+
+    private void goToChapters() {
+        Intent intent = new Intent(this, ChaptersActivity.class);
+        intent.putExtra("LANGUAGE_NAME", languageName);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        finish();
     }
 
     private void showSubscriptionPopUp() {
@@ -122,7 +149,7 @@ public class TestActivity extends AppCompatActivity {
 
         view.findViewById(R.id.btnCancel).setOnClickListener(v -> {
             dialog.dismiss();
-            finish();
+            goToChapters();
         });
 
         dialog.show();

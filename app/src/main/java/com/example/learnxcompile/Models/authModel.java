@@ -22,10 +22,10 @@ public class authModel extends SQLiteOpenHelper {
     public authModel(Context context) {
         super(context, DATABASE_NAME,null, DATABASE_VERSION);
 
-           if(isFirstStart){
-           context.deleteDatabase(DATABASE_NAME);
-           isFirstStart = false;
-            }
+//           if(isFirstStart){
+//           context.deleteDatabase(DATABASE_NAME);
+//           isFirstStart = false;
+//            }
     }
 
     @Override

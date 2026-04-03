@@ -94,10 +94,14 @@ public class ChapterController {
 
     public String getHint(int chapterId) {
         Map<String, String> content = model.getTestContent(chapterId);
-        return content.getOrDefault("hint", "");
+        return content.getOrDefault("hint", "No hint available for this step.");
     }
 
     public void completeChapter(int chapterId) {
         model.unlockNextChapter(chapterId);
+    }
+
+    public void unlockAllForLanguage(String languageName) {
+        model.unlockAllChapters(languageName);
     }
 }

@@ -282,6 +282,24 @@ public class ChapterModel extends SQLiteOpenHelper {
         cursor.close();
     }
 
+    public void unlockAllChapters(String languageName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        if ("ALL".equals(languageName)) {
+            ContentValues values = new ContentValues();
+            values.put("is_locked", 0);
+            db.update(TABLE_NAME, values, null, null);
+        } else {
+            Cursor cursor = db.rawQuery("SELECT id FROM languages WHERE name = ?", new String[]{languageName});
+            if (cursor.moveToFirst()) {
+                int langId = cursor.getInt(0);
+                ContentValues values = new ContentValues();
+                values.put("is_locked", 0);
+                db.update(TABLE_NAME, values, "language_id = ?", new String[]{String.valueOf(langId)});
+            }
+            cursor.close();
+        }
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
